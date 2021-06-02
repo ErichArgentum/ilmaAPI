@@ -1,38 +1,24 @@
+<?php
+require "database.php";
+
+$page = filter_input(INPUT_GET, "page", FILTER_SANITIZE_STRING);
+$page = ($page ? $page : "markers") . ".php";
+if (!file_exists($page)) $page = "markers.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google maps</title>
+	<meta charset="UTF-8">
+	<title></title>
 </head>
-
-<body>
-    <form action="insert.php" method="POST">
-        <input type="text" name="name" placeholder="name">
-        <input type="text" name="latitude" placeholder="latitude">
-        <input type="text" name="longitude" placeholder="longitude">
-        <input type="text" name="description" placeholder="description">
-        <button type="submit">Lisa</button>
-    </form>
-    <div id="map"></div>
-    <script src="app.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
-    </script>
-    <style>
-        #map {
-            height: 100%;
-        }
-
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+<body style="background-color: #333; color: #ccc; width: 300px; margin: 0; width: 100vw;">
+	<nav style="padding: 0 1rem 0 1rem; display: flex; gap: 0.5rem;">
+		<a style="color: white; text-decoration: none; padding: 0.5rem 0.5rem;" href="?page=markers">markers</a>
+		<a style="color: white; text-decoration: none; padding: 0.5rem 0.5rem;" href="?page=map">map</a>
+		<a style="color: white; text-decoration: none; padding: 0.5rem 0.5rem;" href="?page=new">add new markers</a>
+	</nav>
+	<?php require $page; ?>
 </body>
-
-
 </html>
